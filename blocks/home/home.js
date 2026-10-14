@@ -1,76 +1,122 @@
-function createFormatCard(title, description, theme) {
+function getAuthoredValues(block) {
+  return [...block.children].map((row) => row.textContent.trim());
+}
+
+function formatCard(title, description, action, theme) {
   return `
     <a class="format-card ${theme}" href="#formats">
       <span class="format-card__glow"></span>
       <span class="format-card__content">
         <strong>${title}</strong>
         <span>${description}</span>
-        <em>Explore decks &rarr;</em>
+        <em>${action}</em>
       </span>
     </a>`;
 }
 
 export default function decorate(block) {
+  const [
+    brand,
+    heroEyebrow,
+    heroTitle,
+    heroSubtitle,
+    decksLabel,
+    cardsLabel,
+    creatorsLabel,
+    advancedLabel,
+    searchPlaceholder,
+    searchLabel,
+    noteBadge,
+    noteText,
+    introEyebrow,
+    introTitle,
+    introAccent,
+    introDescription,
+    formatsEyebrow,
+    formatsTitle,
+    formatsDescription,
+    commanderTitle,
+    commanderDescription,
+    commanderAction,
+    modernTitle,
+    modernDescription,
+    modernAction,
+    standardTitle,
+    standardDescription,
+    standardAction,
+    limitedTitle,
+    limitedDescription,
+    limitedAction,
+    ctaEyebrow,
+    ctaTitle,
+    ctaLabel,
+    themeLabel,
+    navSearchLabel,
+    menuLabel,
+    menuText,
+  ] = getAuthoredValues(block);
+
   block.innerHTML = `
-    <section class="atlas-hero">
+    <section class="atlas-hero" id="top">
       <nav class="atlas-nav" aria-label="Primary navigation">
-        <a class="atlas-brand" href="/" aria-label="Arcane Atlas home">
-          <span class="atlas-brand__mark">✦</span> ARCANE ATLAS
+        <a class="atlas-brand" href="/" aria-label="${brand}">
+          <span class="atlas-brand__mark">✦</span> ${brand}
         </a>
         <div class="atlas-nav__actions">
-          <button class="icon-button" type="button" aria-label="Toggle theme">☾</button>
-          <button class="icon-button" type="button" aria-label="Search">⌕</button>
-          <button class="menu-button" type="button" aria-label="Open menu">☰ <span>Menu</span></button>
+          <button class="icon-button" type="button" aria-label="${themeLabel}">☾</button>
+          <button class="icon-button" type="button" aria-label="${navSearchLabel}">⌕</button>
+          <button class="menu-button" type="button" aria-label="${menuLabel}">☰ <span>${menuText}</span></button>
         </div>
       </nav>
       <div class="atlas-orb atlas-orb--one"></div>
       <div class="atlas-orb atlas-orb--two"></div>
       <div class="atlas-hero__content">
-        <p class="eyebrow">YOUR NEXT GREAT DECK</p>
-        <h1>ARCANE ATLAS</h1>
-        <p class="atlas-hero__subtitle">A modern home for every card game strategist.</p>
+        <p class="eyebrow">${heroEyebrow}</p>
+        <h1>${heroTitle}</h1>
+        <p class="atlas-hero__subtitle">${heroSubtitle}</p>
         <div class="search-tabs" role="tablist" aria-label="Search type">
-          <button class="active" type="button" role="tab" aria-selected="true">Decks</button>
-          <button type="button" role="tab" aria-selected="false">Cards</button>
-          <button type="button" role="tab" aria-selected="false">Creators</button>
-          <a href="#formats">Advanced &rarr;</a>
+          <button class="active" type="button" role="tab" aria-selected="true">${decksLabel}</button>
+          <button type="button" role="tab" aria-selected="false">${cardsLabel}</button>
+          <button type="button" role="tab" aria-selected="false">${creatorsLabel}</button>
+          <a href="#formats">${advancedLabel}</a>
         </div>
         <form class="deck-search">
-          <label class="sr-only" for="deck-search-input">Search decks</label>
+          <label class="sr-only" for="deck-search-input">${searchLabel}</label>
           <span aria-hidden="true">⌕</span>
-          <input id="deck-search-input" type="search" placeholder="Search decks, commanders or creators">
-          <button type="submit">Search</button>
+          <input id="deck-search-input" type="search" placeholder="${searchPlaceholder}">
+          <button type="submit">${searchLabel}</button>
         </form>
-        <p class="atlas-note"><b>NEW</b> Discover curated community collections</p>
+        <p class="atlas-note"><b>${noteBadge}</b> ${noteText}</p>
       </div>
     </section>
     <section class="intro-section">
       <span class="crown">♛</span>
-      <p class="eyebrow eyebrow--dark">PLAY YOUR WAY</p>
-      <h2>Whatever your strategy,<br><span>we have a place for it.</span></h2>
-      <p>Build, tune, and share decks with a thriving community of players. Explore the formats you love and find fresh inspiration for your next game night.</p>
+      <p class="eyebrow eyebrow--dark">${introEyebrow}</p>
+      <h2>${introTitle}<br><span>${introAccent}</span></h2>
+      <p>${introDescription}</p>
     </section>
     <section class="formats-section" id="formats">
       <div class="formats-section__heading">
-        <p class="eyebrow eyebrow--dark">DISCOVER FORMATS</p>
-        <h2>Start your next brew</h2>
-        <p>From casual tables to competitive play, there is a format waiting for you.</p>
+        <p class="eyebrow eyebrow--dark">${formatsEyebrow}</p>
+        <h2>${formatsTitle}</h2>
+        <p>${formatsDescription}</p>
       </div>
       <div class="format-grid">
-        ${createFormatCard('Commander', 'Build around a legendary leader and bring your story to the table.', 'violet')}
-        ${createFormatCard('Modern', 'Powerful strategies, iconic cards, and a constantly evolving metagame.', 'emerald')}
-        ${createFormatCard('Standard', 'The newest cards and the most exciting ways to play them.', 'crimson')}
-        ${createFormatCard('Limited', 'Draft, discover, and make every pick count.', 'gold')}
+        ${formatCard(commanderTitle, commanderDescription, commanderAction, 'violet')}
+        ${formatCard(modernTitle, modernDescription, modernAction, 'emerald')}
+        ${formatCard(standardTitle, standardDescription, standardAction, 'crimson')}
+        ${formatCard(limitedTitle, limitedDescription, limitedAction, 'gold')}
       </div>
     </section>
     <section class="cta-section">
-      <p class="eyebrow">READY TO PLAY?</p>
-      <h2>Your deck is waiting.</h2>
-      <a href="#top">Create a deck &rarr;</a>
+      <p class="eyebrow">${ctaEyebrow}</p>
+      <h2>${ctaTitle}</h2>
+      <a href="#top">${ctaLabel}</a>
     </section>`;
 
   const tabs = block.querySelectorAll('[role="tab"]');
   const search = block.querySelector('.deck-search');
+
   tabs.forEach((tab) => {
     tab.addEventListener('click', () => {
       tabs.forEach((item) => {
@@ -79,10 +125,9 @@ export default function decorate(block) {
       });
     });
   });
+
   search.addEventListener('submit', (event) => {
     event.preventDefault();
-    const input = search.querySelector('input');
-    input.focus();
-    input.setAttribute('placeholder', input.value ? `No results for “${input.value}” yet` : 'Enter a deck name to begin');
+    search.querySelector('input').focus();
   });
 }
