@@ -1,0 +1,12 @@
+{
+    ":names": [
+        "prueba"
+    ],
+    "prueba":{
+        "total": 0,
+        "offset": 0,
+        "limit": 0,
+        "columns": [],
+        "data": [[]]
+    }
+}
