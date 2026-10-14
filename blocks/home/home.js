@@ -1,5 +1,16 @@
 function getAuthoredValues(block) {
-  return [...block.children].map((row) => row.textContent.trim());
+  const rows = [...block.children];
+
+  // DA can serialize a one-column block either as one row per value or as
+  // one row containing separate paragraphs. Support both authoring formats.
+  if (rows.length === 1) {
+    const paragraphs = [...rows[0].querySelectorAll('p')]
+      .map((paragraph) => paragraph.textContent.trim())
+      .filter(Boolean);
+    if (paragraphs.length > 1) return paragraphs;
+  }
+
+  return rows.map((row) => row.textContent.trim());
 }
 
 function formatCard(title, description, action, theme) {
