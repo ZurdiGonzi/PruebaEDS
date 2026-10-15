@@ -209,6 +209,7 @@ function loadDelayed() {
 }
 
 async function loadPage() {
+  if (window.location.pathname === '/nav') document.body.classList.add('nav-preview');
   await loadEager(document);
   await loadLazy(document);
   loadDelayed();
