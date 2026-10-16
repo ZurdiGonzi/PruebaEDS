@@ -39,12 +39,12 @@ export default function decorate(block) {
 
     const discountText = cells
       .map((cell) => cell.textContent.trim())
-      .find((text) => /-\s?\d+\s?%/.test(text));
+      .find((text) => /-?\s?\d+\s?%/.test(text));
 
     if (discountText) {
       const discount = document.createElement('span');
       discount.className = 'quad-discount';
-      discount.textContent = discountText.match(/-\s?\d+\s?%/)[0].replace(/\s+/g, '');
+      discount.textContent = discountText.match(/-?\s?\d+\s?%/)[0].replace(/\s+/g, '');
       product.append(discount);
     }
 
