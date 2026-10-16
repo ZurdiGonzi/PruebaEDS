@@ -1,1 +1,187 @@
-/* Estilos disponibles para implementar. */
+@import url('./variants/product-grid/product-grid.css');
+
+.home {
+  --home-gap: 16px;
+  --home-card-radius: 14px;
+  --home-surface: #fff;
+  --home-ink: #161616;
+  --home-control-size: 52px;
+  padding: 24px 0;
+}
+
+.home-carousel {
+  position: relative;
+}
+
+.home-viewport {
+  overflow-x: auto;
+  scrollbar-width: none;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+}
+
+.home-viewport::-webkit-scrollbar {
+  display: none;
+}
+
+.home-track {
+  display: flex;
+  gap: var(--home-gap);
+  width: max-content;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.home-card {
+  display: flex;
+  flex: 0 0 calc((100vw - 64px) / 3);
+  flex-direction: column;
+  box-sizing: border-box;
+  min-width: 0;
+  min-height: 390px;
+  overflow: hidden;
+  color: var(--home-ink);
+  background: var(--home-surface);
+  border-radius: var(--home-card-radius);
+  scroll-snap-align: start;
+}
+
+.home-card-content {
+  z-index: 1;
+  padding: 20px 20px 12px;
+}
+
+.home-card-content > :first-child {
+  margin-top: 0;
+}
+
+.home-card-content > :last-child {
+  margin-bottom: 0;
+}
+
+.home-card-content h1,
+.home-card-content h2,
+.home-card-content h3,
+.home-card-content h4,
+.home-card-content h5,
+.home-card-content h6 {
+  margin-bottom: 8px;
+  font-size: clamp(1.4rem, 2vw, 2.2rem);
+  line-height: 1.05;
+}
+
+.home-card-content p {
+  font-size: 1rem;
+  line-height: 1.35;
+}
+
+.home-card-content a {
+  color: inherit;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.home-card-media {
+  flex: 1;
+  min-height: 0;
+}
+
+.home-card-media > a,
+.home-card-media picture,
+.home-card-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.home-card-media img {
+  object-fit: cover;
+}
+
+.home-navigation {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  display: grid;
+  width: var(--home-control-size);
+  height: 84px;
+  padding: 0;
+  color: #111;
+  font-family: inherit;
+  font-size: 52px;
+  line-height: 1;
+  cursor: pointer;
+  background: #fff;
+  border: 1px solid #8d8d8d;
+  border-radius: 12px;
+  box-shadow: 0 1px 4px rgb(0 0 0 / 18%);
+  place-items: center;
+  transform: translateY(-50%);
+}
+
+.home-navigation:hover:not(:disabled) {
+  background: #f2f2f2;
+}
+
+.home-navigation:focus-visible {
+  outline: 3px solid #146eb4;
+  outline-offset: 3px;
+}
+
+.home-navigation:disabled {
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.home-navigation-previous {
+  left: 0;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.home-navigation-next {
+  right: 0;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+@media (min-width: 1200px) {
+  .home-card {
+    flex-basis: calc((min(100vw, 1440px) - 96px) / 3);
+  }
+}
+
+@media (max-width: 899px) {
+  .home-card {
+    flex-basis: calc((100vw - 56px) / 2);
+  }
+}
+
+@media (max-width: 599px) {
+  .home {
+    --home-gap: 12px;
+    --home-control-size: 42px;
+  }
+
+  .home-card {
+    flex-basis: calc(100vw - 56px);
+    min-height: 350px;
+  }
+
+  .home-card-content {
+    padding: 16px 16px 10px;
+  }
+
+  .home-navigation {
+    height: 64px;
+    font-size: 42px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-viewport {
+    scroll-behavior: auto;
+  }
+}
